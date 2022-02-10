@@ -1,2 +1,35 @@
+<hr>
+<label for="inputUsuario">Nome de usuário:</label>
+<input
+    type="text"
+    name="inputUsuario"
+    class="form-control"
+    [(ngModel)]="username"
+    (input)="allowRenameUser($event)"
+>
+<button 
+    class="btn btn-primary"
+    [disabled]="!allowButton"
+    (click)="onRenameUser()">Alterar Usuário</button>
+<p> {{ userStatus }} </p>
+<hr>
+<label for="inputServerName">Server Name</label>
+<!--
+<input 
+    type="text" 
+    name="inputServerName"
+    class="form-control" 
+    (input)="onUpdateServerName($event)">
+-->
+<input 
+    type="text" 
+    name="inputServerName"
+    class="form-control" 
+    [(ngModel)]="serverName">
+<button 
+    class="btn btn-primary"
+    [disabled]="!allowNewServer"
+    (click)="onCreateServer()">Novo Servidor</button>
+<p>{{ serverCreationStatus }}</p>
 <app-server></app-server>
 <app-server></app-server>
