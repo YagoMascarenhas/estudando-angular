@@ -1,5 +1,9 @@
 <hr>
 <label for="inputUsuario">Nome de usuário:</label>
+<!--
+    the [(ngModel)] acessa a variável username dentro da classe a altera conforme digito o código
+    the (input) chama a função allowRenameUser() de dentro da classe toda vez que uma tecla é digitada dentro do input. Ele passa o $event como parametro para que ele acesse todos os atributos do input de dentro da classe
+-->
 <input
     type="text"
     name="inputUsuario"
@@ -32,6 +36,10 @@
     [disabled]="!allowNewServer"
     (click)="onCreateServer()">Novo Servidor</button>
 <!-- <p>{{ serverCreationStatus }}</p> -->
+<!--
+    exibe o texto apenas se serverCreated é verdadeiro
+    se não, ele chama o ng-template noServer
+-->
 <p *ngIf="serverCreated; else noServer">O servidor {{ serverName }} foi criado!</p>
 
 <ng-template #noServer>
@@ -39,11 +47,23 @@
 </ng-template>
 
 <app-server *ngFor="let server of servers"></app-server>
+
 <hr>
+
+<!--
+    chama a função onClickDetails() toda vez que o botão é pressionado
+-->
 <button
     class="btn btn-primary"
     (click)="onClickDetails()">Exibir/Ocultar detalhes</button>
+<!--
+    exibe o parágrafo apenas se a variável showText for true
+-->
 <p *ngIf="showText">Details</p>
+<!--
+    ngFor chama o vetor clicks de dentro da classe e, para cada elemento adicionado (com o botão anterior), ele exibe o número de cliques dados. O uso de * é obrigatório para diretivas que manipulam o DOM
+    ngClass adiciona uma classe ao atributo. Nesse caso, adiciona apenas se o número for maior ou igual a 5. Ou seja, pode ser usada com condições
+-->
 <p *ngFor="let clk of clicks"
     [ngClass]="{blueText: clk >= 5}"
 >{{ clk }}</p>
