@@ -26,10 +26,24 @@
     name="inputServerName"
     class="form-control" 
     [(ngModel)]="serverName">
+
 <button 
     class="btn btn-primary"
     [disabled]="!allowNewServer"
     (click)="onCreateServer()">Novo Servidor</button>
-<p>{{ serverCreationStatus }}</p>
-<app-server></app-server>
-<app-server></app-server>
+<!-- <p>{{ serverCreationStatus }}</p> -->
+<p *ngIf="serverCreated; else noServer">O servidor {{ serverName }} foi criado!</p>
+
+<ng-template #noServer>
+    <p>Nenhum servidor foi criado</p>
+</ng-template>
+
+<app-server *ngFor="let server of servers"></app-server>
+<hr>
+<button
+    class="btn btn-primary"
+    (click)="onClickDetails()">Exibir/Ocultar detalhes</button>
+<p *ngIf="showText">Details</p>
+<p *ngFor="let clk of clicks"
+    [ngClass]="{blueText: clk >= 5}"
+>{{ clk }}</p>

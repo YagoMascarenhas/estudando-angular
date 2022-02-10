@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { updateShorthandPropertyAssignment } from 'typescript';
 
 @Component({
   selector: 'app-servers',
   templateUrl: './servers.component.html',
-  styleUrls: ['./servers.component.css']
+  styleUrls: ['./servers.component.css'],
+  styles: [`
+    .blueText {
+      color: blue;
+    }
+  `]
 })
 export class ServersComponent implements OnInit {
   allowNewServer = false;
@@ -12,8 +16,12 @@ export class ServersComponent implements OnInit {
   userStatus = ""
   serverName = "TestServer";
   serverCreated = false;
+  servers = [];
   username = "";
   allowButton = false;
+  clicks = [];
+  count = 1;
+  showText = false;
 
   constructor() {
     setTimeout(() => {
@@ -40,12 +48,18 @@ export class ServersComponent implements OnInit {
   }
 
   onCreateServer() {
+    this.serverCreated = true;
+    this.servers.push(this.serverName);
     this.serverCreationStatus = "O servidor " + this.serverName + " foi criado";
   }
   
   onUpdateServerName(event: Event) {
     this.serverName = (<HTMLInputElement>event.target).value;
   }
-  
 
+  onClickDetails() {
+    this.showText = !this.showText;
+    this.clicks.push(this.count);
+    this.count++;
+  }
 }
